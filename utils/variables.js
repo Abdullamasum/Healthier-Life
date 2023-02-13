@@ -8,7 +8,7 @@ const tagsUrl = baseUrl + 'tags/';
 const favouritesUrl = baseUrl + 'favourites/';
 
 // Our application's tag added to each post made with it
-const appTag = 'juliusExampleApp';
+const appTag = 'HealthierLifeApp';
 
 export {
   baseUrl,
