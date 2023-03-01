@@ -30,7 +30,8 @@ const RegisterForm = (props) => {
       const registerResult = await postUser(userData);
       console.log('Register, register', registerResult);
 
-      if (registerResult.user_id === null) return; // Did not successfully register so stop here
+      if (registerResult.user_id === null) return;
+      // Did not successfully register so stop here
 
       // TODO: Log in automatically and navigate to home page.
     } catch (error) {
