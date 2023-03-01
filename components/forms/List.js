@@ -1,7 +1,8 @@
 import {FlatList} from 'react-native';
-import {useMedia} from '../hooks/ApiHooks';
+
 import ListItem from './ListItem';
 import PropTypes from 'prop-types';
+import {useMedia} from '../../hooks/ApiHooks';
 
 const List = ({navigation, myFilesOnly = false}) => {
   const {mediaArray} = useMedia(myFilesOnly);
