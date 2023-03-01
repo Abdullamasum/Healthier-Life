@@ -59,7 +59,7 @@ const StackScreen = () => {
           <Stack.Screen name="Modify" component={Modify} />
         </>
       ) : (
-        <Stack.Screen name="Login" component={Login}></Stack.Screen>
+        <Stack.Screen name="Home" component={Home}></Stack.Screen>
       )}
     </Stack.Navigator>
   );
