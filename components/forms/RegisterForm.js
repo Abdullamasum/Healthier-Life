@@ -140,12 +140,6 @@ const RegisterForm = (props) => {
         name="confirmPassword"
       />
 
-      <Button
-        title={displayPassword ? 'Hide Password' : 'Show Password'}
-        onPress={() => {
-          changeDisplayPassword(!displayPassword);
-        }}
-      />
       <Controller
         control={control}
         rules={{
@@ -166,6 +160,12 @@ const RegisterForm = (props) => {
           />
         )}
         name="email"
+      />
+      <Button
+        title={displayPassword ? 'Hide Password' : 'Show Password'}
+        onPress={() => {
+          changeDisplayPassword(!displayPassword);
+        }}
       />
 
       <Button title="Register" onPress={handleSubmit(register)} />
