@@ -107,7 +107,7 @@ const Upload = ({navigation}) => {
             clearUpload();
 
             // TODO: Navigate home or the post made when navigation is done!
-            // navigation.navigate('Home');
+            navigation.navigate('Home');
           },
         },
       ]);
