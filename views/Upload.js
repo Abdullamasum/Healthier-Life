@@ -4,7 +4,6 @@ import {Controller, useForm} from 'react-hook-form';
 import {Input, Button} from '@rneui/base';
 import {CardDivider} from '@rneui/base/dist/Card/Card.Divider';
 import {
-  StyleSheet,
   Keyboard,
   TouchableOpacity,
   ScrollView,
@@ -120,11 +119,7 @@ const Upload = ({navigation}) => {
 
   return (
     <ScrollView>
-      <TouchableOpacity
-        onPress={() => Keyboard.dismiss()}
-        style={styles.container}
-        activeOpacity={1}
-      >
+      <TouchableOpacity onPress={() => Keyboard.dismiss()} activeOpacity={1}>
         <Card>
           <Controller
             control={control}
@@ -197,11 +192,5 @@ const Upload = ({navigation}) => {
 Upload.propTypes = {
   navigation: PropTypes.object,
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-});
 
 export default Upload;
