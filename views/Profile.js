@@ -8,10 +8,11 @@ import PropTypes from 'prop-types';
 import missingProfileImage from '../img/missingProfile.png';
 import ProfileEditForm from '../components/forms/ProfileEditForm';
 import {CardDivider} from '@rneui/base/dist/Card/Card.Divider';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const Profile = ({navigation}) => {
   const {getFilesByTag} = useTag();
-  const {setIsLoggedIn, user, setUser} = useContext(MainContext);
+  const {update, setIsLoggedIn, user, setUser} = useContext(MainContext);
   const [avatar, setAvatar] = useState('');
   const [toggleEditForm, setToggleEditForm] = useState(false);
 
@@ -26,59 +27,72 @@ const Profile = ({navigation}) => {
 
   useEffect(() => {
     loadAvatar();
-  }, []);
+  }, [update]);
+
+  const onChangeProfilePicturePressed = () => {
+    navigation.navigate('UpdateProfilePicture');
+  };
 
   const onToggleEditPressed = () => {
     setToggleEditForm(!toggleEditForm);
   };
 
   return (
-    <Card>
-      <Card.Title>{user.username}</Card.Title>
-      <Card.Image
-        source={avatar ? {uri: uploadsUrl + avatar} : missingProfileImage}
-      />
-      <ListItem>
-        <Icon name="email" />
-        <ListItem.Title>{user.email}</ListItem.Title>
-      </ListItem>
-      <ListItem>
-        <Icon name="badge" />
-        <ListItem.Title>{user.full_name}</ListItem.Title>
-      </ListItem>
-      <Button
-        title="Logout!"
-        onPress={async () => {
-          console.log('Logging out!');
-          setUser({});
-          setIsLoggedIn(false);
-          try {
-            await AsyncStorage.clear();
-          } catch (error) {
-            console.error('clearing asyncstorage failed', error);
-          }
-        }}
-      />
+    <ScrollView>
+      <Card>
+        <Card.Title>{user.username}</Card.Title>
+        <Card.Image
+          source={avatar ? {uri: uploadsUrl + avatar} : missingProfileImage}
+        />
 
-      <CardDivider />
+        <ListItem>
+          <Icon name="email" />
+          <ListItem.Title>{user.email}</ListItem.Title>
+          <Icon name="badge" />
+          <ListItem.Title>{user.full_name}</ListItem.Title>
+        </ListItem>
 
-      <Button
-        title="My Files"
-        onPress={() => {
-          navigation.navigate('MyFiles');
-        }}
-      />
+        <Button
+          title="Logout!"
+          onPress={async () => {
+            console.log('Logging out!');
+            setUser({});
+            setIsLoggedIn(false);
+            try {
+              await AsyncStorage.clear();
+            } catch (error) {
+              console.error('clearing asyncstorage failed', error);
+            }
+          }}
+        />
 
-      <CardDivider />
+        <CardDivider />
 
-      {!toggleEditForm || (
-        <ProfileEditForm setToggleEditForm={setToggleEditForm} />
-      )}
-      <Button
-        title={toggleEditForm ? 'Hide Edit User Info' : 'Edit User Info'}
-        onPress={onToggleEditPressed}
-      />
-    </Card>
+        <Button
+          title="My Files"
+          onPress={() => {
+            navigation.navigate('MyFiles');
+          }}
+        />
+      </Card>
+
+      <Card>
+        <Button
+          title="Change Profile Photo"
+          onPress={onChangeProfilePicturePressed}
+        />
+
+        <CardDivider />
+
+        {!toggleEditForm || (
+          <ProfileEditForm setToggleEditForm={setToggleEditForm} />
+        )}
+        <Button
+          title={toggleEditForm ? 'Hide Edit User Info' : 'Edit User Info'}
+          onPress={onToggleEditPressed}
+        />
+      </Card>
+    </ScrollView>
   );
 };
 

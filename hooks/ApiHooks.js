@@ -71,6 +71,15 @@ const useMedia = (myFilesOnly) => {
 
   // Posts the file to the server and then a tag of the app to that post
   const postMediaWithAppTag = async (fileData, token) => {
+    try {
+      return postMediaWithTag(fileData, appTag, token);
+    } catch (error) {
+      throw new Error('ApiHooks, postMediaWithAppTag: ' + error.message);
+    }
+  };
+
+  // Posts the file to the server and then add the given tag to it
+  const postMediaWithTag = async (fileData, tag, token) => {
     const options = {
       method: 'POST',
       headers: {
@@ -83,7 +92,7 @@ const useMedia = (myFilesOnly) => {
       const result = await doFetch(mediaUrl, options);
 
       // Tag posting
-      const tagData = {file_id: result.file_id, tag: appTag};
+      const tagData = {file_id: result.file_id, tag: tag};
       const tagResult = await postTag(tagData, token);
       console.log('Apihooks, postMediaWithAppTag: ' + tagResult);
 
@@ -131,7 +140,14 @@ const useMedia = (myFilesOnly) => {
     loadMedia();
   }, [update]);
 
-  return {mediaArray, postMedia, postMediaWithAppTag, deleteMedia, putMedia};
+  return {
+    mediaArray,
+    postMedia,
+    postMediaWithAppTag,
+    postMediaWithTag,
+    deleteMedia,
+    putMedia,
+  };
 };
 
 const useAuthentication = () => {

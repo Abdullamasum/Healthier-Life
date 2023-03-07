@@ -10,6 +10,9 @@ const favouritesUrl = baseUrl + 'favourites/';
 // Our application's tag added to each post made with it
 const appTag = 'HealthierLifeApp';
 
+// User profile picture tag prefix
+const userPictureTagPrefix = 'avatar_';
+
 export {
   baseUrl,
   uploadsUrl,
@@ -19,4 +22,5 @@ export {
   tagsUrl,
   appTag,
   favouritesUrl,
+  userPictureTagPrefix,
 };
