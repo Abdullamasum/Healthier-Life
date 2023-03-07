@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import {Input, Button} from '@rneui/base';
 import {useUser} from '../../hooks/ApiHooks';
+import PropTypes from 'prop-types';
 
 const RegisterForm = (props) => {
   const {postUser, checkUsername} = useUser();
@@ -23,6 +24,8 @@ const RegisterForm = (props) => {
   });
   const [displayPassword, changeDisplayPassword] = useState(false);
 
+  const setToggleForm = props.setToggleForm;
+
   const register = async (userData) => {
     delete userData.confirmPassword;
     console.log('Registering: ', userData);
@@ -32,6 +35,20 @@ const RegisterForm = (props) => {
       console.log('Register, register', registerResult);
 
       if (registerResult.user_id === null) return;
+
+      // Successful register! Notify the user and toggle back to login form!
+      Alert.alert(
+        'Register Successful!',
+        'Proceed to log in with your new user information.',
+        [
+          {
+            text: 'Ok',
+            onPress: () => {
+              setToggleForm(true); // Toggles the form to login
+            },
+          },
+        ]
+      );
     } catch (error) {
       console.error('Register, register: ', error);
       return;
@@ -168,6 +185,10 @@ const RegisterForm = (props) => {
       <Button title="Register" onPress={handleSubmit(register)} />
     </View>
   );
+};
+
+RegisterForm.propTypes = {
+  setToggleForm: PropTypes.func,
 };
 
 export default RegisterForm;

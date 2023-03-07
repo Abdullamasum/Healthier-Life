@@ -1,11 +1,38 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, SafeAreaView} from 'react-native';
 import {Keyboard, ScrollView, TouchableOpacity} from 'react-native';
 import {Button, Card, Text} from '@rneui/base';
 import LoginForm from '../components/forms/LoginForm';
 import RegisterForm from '../components/forms/RegisterForm';
+import {useUser} from '../hooks/ApiHooks';
+import {MainContext} from '../contexts/MainContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Welcome = () => {
   const [toggleForm, setToggleForm] = useState(true);
+  const {setIsLoggedIn, setUser} = useContext(MainContext);
+  const {getUserByToken} = useUser();
+
+  // Check if the user has already a valid user token saved
+  const checkToken = async () => {
+    try {
+      const userToken = await AsyncStorage.getItem('userToken');
+
+      if (userToken === null) return; // Return if no existing token
+
+      console.log('Welcome, checkToken, token:', userToken);
+      const userData = await getUserByToken(userToken);
+      console.log(userData);
+      setUser(userData);
+      setIsLoggedIn(true);
+    } catch (error) {
+      console.warn('No valid token available', error);
+      setIsLoggedIn(false);
+    }
+  };
+
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -37,7 +64,11 @@ const Welcome = () => {
           </Card>
           <Card>
             <ScrollView>
-              {toggleForm ? <LoginForm /> : <RegisterForm />}
+              {toggleForm ? (
+                <LoginForm />
+              ) : (
+                <RegisterForm setToggleForm={setToggleForm} />
+              )}
               <Text>
                 {toggleForm
                   ? 'No account yet? Please register.'
