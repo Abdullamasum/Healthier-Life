@@ -25,7 +25,6 @@ const Modify = ({navigation, route}) => {
   });
 
   const modifyFile = async (data) => {
-    // create form data and post it
     setLoading(true);
     console.log('data', data);
     try {

@@ -26,17 +26,14 @@ const RegisterForm = (props) => {
   const register = async (userData) => {
     delete userData.confirmPassword;
     console.log('Registering: ', userData);
+
     try {
       const registerResult = await postUser(userData);
       console.log('Register, register', registerResult);
 
       if (registerResult.user_id === null) return;
-      // Did not successfully register so stop here
-
-      // TODO: Log in automatically and navigate to home page.
-    } catch (error) {
+    } catch {
       console.error('Register, register: ', error);
-      // TODO: notify user about failed registering
       return;
     }
   };

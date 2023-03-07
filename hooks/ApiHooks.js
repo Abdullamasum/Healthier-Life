@@ -25,14 +25,17 @@ const doFetch = async (url, options) => {
   return json;
 };
 
-const useMedia = () => {
+const useMedia = (myFilesOnly) => {
   const [mediaArray, setMediaArray] = useState([]);
-  const {update} = useContext(MainContext);
+  const {update, user} = useContext(MainContext);
   const {getFilesByTag, postTag} = useTag();
 
   const loadMedia = async () => {
     try {
       let json = await getFilesByTag(appTag);
+      if (myFilesOnly) {
+        json = json.filter((file) => file.user_id === user.user_id);
+      }
       json = json.reverse();
 
       // Get the extra data including the thumbnails for each file.
@@ -293,10 +296,6 @@ const useFavourite = () => {
     }
   };
 
-  // TODO: https://media.mw.metropolia.fi/wbma/docs/#api-Favourite-GetCurrentUserFavourites
-  // const getFavouritesByUser = async (token) => {};
-
-  // Remove the given user's favourite from the given post
   const deleteFavourite = async (fileId, token) => {
     const options = {
       method: 'DELETE',
