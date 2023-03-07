@@ -3,14 +3,14 @@ import {uploadsUrl} from '../utils/variables';
 import PropTypes from 'prop-types';
 import {Text, Card, ListItem, Icon} from '@rneui/themed';
 import {Video} from 'expo-av';
-import {Modal, ScrollView} from 'react-native';
-import {useFavourite, useUser} from '../hooks/ApiHooks';
+import {Alert, Modal, ScrollView} from 'react-native';
+import {useFavourite, useMedia, useUser} from '../hooks/ApiHooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {MainContext} from '../contexts/MainContext';
 import * as ScreenOrientation from 'expo-screen-orientation';
-import {Image} from '@rneui/base';
+import {ButtonGroup, Image} from '@rneui/base';
 
-const Single = ({route}) => {
+const Single = ({navigation, route}) => {
   // console.log(route.params);
   const {
     title,
@@ -23,11 +23,12 @@ const Single = ({route}) => {
     filesize,
   } = route.params;
   const video = useRef(null);
+  const {deleteMedia} = useMedia();
   const [owner, setOwner] = useState({});
   const [likes, setLikes] = useState([]);
   const [userLikesIt, setUserLikesIt] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const {user} = useContext(MainContext);
+  const {user, update, setUpdate} = useContext(MainContext);
   const {getUserById} = useUser();
   const {getFavouritesByFileId, postFavourite, deleteFavourite} =
     useFavourite();
@@ -102,6 +103,36 @@ const Single = ({route}) => {
     }
   };
 
+  // Called when user wants to delete this post
+  const doDelete = () => {
+    try {
+      Alert.alert('Confirm', 'Delete this file permanently?', [
+        {text: 'Cancel'},
+        {
+          text: 'Delete',
+          onPress: async () => {
+            const token = await AsyncStorage.getItem('userToken');
+            const response = await deleteMedia(fileId, token);
+            response && setUpdate(!update);
+
+            // Notify about deletion success
+            Alert.alert('Post Deleted', '', [
+              {
+                text: 'Ok',
+                onPress: () => {
+                  // Navigate to home after deletion
+                  navigation.navigate('Home');
+                },
+              },
+            ]);
+          },
+        },
+      ]);
+    } catch (error) {
+      console.error('ListItem, doDelete: ' + error);
+    }
+  };
+
   useEffect(() => {
     getOwner();
     getLikes();
@@ -171,6 +202,27 @@ const Single = ({route}) => {
             )}
             <Text>Total likes: {likes.length}</Text>
           </ListItem>
+          {userId === user.user_id && (
+            <ButtonGroup
+              buttons={['Modify', 'Delete']}
+              onPress={(index) => {
+                if (index === 0) {
+                  navigation.navigate('Modify', {
+                    file: {
+                      title,
+                      description,
+                      filename,
+                      user_id: userId,
+                      media_type: type,
+                      file_id: fileId,
+                    },
+                  });
+                } else {
+                  doDelete();
+                }
+              }}
+            />
+          )}
         </Card>
       </ScrollView>
       <Modal
@@ -194,6 +246,7 @@ const Single = ({route}) => {
 
 Single.propTypes = {
   route: PropTypes.object,
+  navigation: PropTypes.object,
 };
 
 export default Single;
