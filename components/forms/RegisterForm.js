@@ -32,7 +32,7 @@ const RegisterForm = (props) => {
       console.log('Register, register', registerResult);
 
       if (registerResult.user_id === null) return;
-    } catch {
+    } catch (error) {
       console.error('Register, register: ', error);
       return;
     }

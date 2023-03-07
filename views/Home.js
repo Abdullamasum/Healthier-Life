@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 const Home = ({navigation}) => {
   return (
-    <view>
+    <>
       <SafeAreaView style={styles.container}>
         <List navigation={navigation} />
       </SafeAreaView>
-    </view>
+    </>
   );
 };
 
