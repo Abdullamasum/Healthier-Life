@@ -108,7 +108,7 @@ const StackScreen = () => {
             name="Welcome"
             component={Welcome}
             options={{
-              title: 'Welcome To Healtier Life',
+              title: 'Welcome To Healthier Life',
               headerStyle: styles.TabHeader,
             }}
           ></Stack.Screen>
