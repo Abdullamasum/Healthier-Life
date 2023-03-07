@@ -17,6 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useMedia} from '../hooks/ApiHooks';
 import {MainContext} from '../contexts/MainContext';
 import {Video} from 'expo-av';
+import {mainAppColor} from '../utils/colors';
 
 const Upload = ({navigation}) => {
   const {
@@ -172,14 +173,15 @@ const Upload = ({navigation}) => {
 
           <CardDivider />
 
-          <Button title="Select File" onPress={pickFile} />
+          <Button title="Select File" color={mainAppColor} onPress={pickFile} />
           <CardDivider />
-          <Button title="Clear" onPress={clearUpload} />
+          <Button title="Clear" color={mainAppColor} onPress={clearUpload} />
         </Card>
         <Card>
           <Button
             disabled={!mediaFile.uri || errors.title}
             title="Upload"
+            color={mainAppColor}
             onPress={handleSubmit(uploadFile)}
           />
           {isLoading && <ActivityIndicator size="large" />}

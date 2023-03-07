@@ -204,7 +204,7 @@ const Single = ({navigation, route}) => {
           </ListItem>
           {userId === user.user_id && (
             <ButtonGroup
-              buttons={['Modify', 'Delete']}
+              buttons={['Edit', 'Delete']}
               onPress={(index) => {
                 if (index === 0) {
                   navigation.navigate('Modify', {

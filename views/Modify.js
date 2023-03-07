@@ -16,6 +16,7 @@ import {useMedia} from '../hooks/ApiHooks';
 import {MainContext} from '../contexts/MainContext';
 import {Video} from 'expo-av';
 import {uploadsUrl} from '../utils/variables';
+import {mainAppColor} from '../utils/colors';
 
 const Modify = ({navigation, route}) => {
   const {file} = route.params;
@@ -122,7 +123,11 @@ const Modify = ({navigation, route}) => {
           <CardDivider />
         </Card>
         <Card>
-          <Button title="Modify" onPress={handleSubmit(modifyFile)} />
+          <Button
+            title="Save Changes"
+            color={mainAppColor}
+            onPress={handleSubmit(modifyFile)}
+          />
           {isLoading && <ActivityIndicator size="large" />}
         </Card>
       </TouchableOpacity>

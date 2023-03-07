@@ -4,6 +4,8 @@ import {Controller, useForm} from 'react-hook-form';
 import {Input, Button} from '@rneui/base';
 import {useUser} from '../../hooks/ApiHooks';
 import PropTypes from 'prop-types';
+import {CardDivider} from '@rneui/base/dist/Card/Card.Divider';
+import {mainAppColor} from '../../utils/colors';
 
 const RegisterForm = (props) => {
   const {postUser, checkUsername} = useUser();
@@ -177,12 +179,19 @@ const RegisterForm = (props) => {
       />
       <Button
         title={displayPassword ? 'Hide Password' : 'Show Password'}
+        color={mainAppColor}
         onPress={() => {
           changeDisplayPassword(!displayPassword);
         }}
       />
 
-      <Button title="Register" onPress={handleSubmit(register)} />
+      <CardDivider />
+
+      <Button
+        title="Register"
+        color={mainAppColor}
+        onPress={handleSubmit(register)}
+      />
     </View>
   );
 };

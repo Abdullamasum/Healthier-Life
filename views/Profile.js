@@ -9,6 +9,7 @@ import missingProfileImage from '../img/missingProfile.png';
 import ProfileEditForm from '../components/forms/ProfileEditForm';
 import {CardDivider} from '@rneui/base/dist/Card/Card.Divider';
 import {ScrollView} from 'react-native-gesture-handler';
+import {mainAppColor} from '../utils/colors';
 
 const Profile = ({navigation}) => {
   const {getFilesByTag} = useTag();
@@ -54,6 +55,7 @@ const Profile = ({navigation}) => {
 
         <Button
           title="Logout!"
+          color={mainAppColor}
           onPress={async () => {
             console.log('Logging out!');
             setUser({});
@@ -69,7 +71,8 @@ const Profile = ({navigation}) => {
         <CardDivider />
 
         <Button
-          title="My Files"
+          title="My Posts"
+          color={mainAppColor}
           onPress={() => {
             navigation.navigate('MyFiles');
           }}
@@ -79,6 +82,7 @@ const Profile = ({navigation}) => {
       <Card>
         <Button
           title="Change Profile Photo"
+          color={mainAppColor}
           onPress={onChangeProfilePicturePressed}
         />
 
@@ -89,6 +93,7 @@ const Profile = ({navigation}) => {
         )}
         <Button
           title={toggleEditForm ? 'Hide Edit User Info' : 'Edit User Info'}
+          color={mainAppColor}
           onPress={onToggleEditPressed}
         />
       </Card>

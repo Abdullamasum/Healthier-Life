@@ -7,6 +7,7 @@ import {MainContext} from '../../contexts/MainContext';
 import {useUser} from '../../hooks/ApiHooks';
 import {CardDivider} from '@rneui/base/dist/Card/Card.Divider';
 import PropTypes from 'prop-types';
+import {mainAppColor} from '../../utils/colors';
 
 const ProfileEditForm = (props) => {
   const {changeUser} = useUser();
@@ -108,7 +109,11 @@ const ProfileEditForm = (props) => {
         name="email"
       />
 
-      <Button title="Save Changes" onPress={handleSubmit(saveChanges)} />
+      <Button
+        title="Save Changes"
+        color={mainAppColor}
+        onPress={handleSubmit(saveChanges)}
+      />
 
       <CardDivider />
     </View>

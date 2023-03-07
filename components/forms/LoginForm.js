@@ -7,6 +7,7 @@ import {useAuthentication} from '../../hooks/ApiHooks';
 import {Controller, useForm} from 'react-hook-form';
 import {Input, Button, Text} from '@rneui/base';
 import {CardDivider} from '@rneui/base/dist/Card/Card.Divider';
+import {mainAppColor} from '../../utils/colors';
 
 const LoginForm = (props) => {
   const {setIsLoggedIn, setUser} = useContext(MainContext);
@@ -74,12 +75,17 @@ const LoginForm = (props) => {
 
       <Button
         title={displayPassword ? 'Hide Password' : 'Show Password'}
+        color={mainAppColor}
         onPress={() => {
           changeDisplayPassword(!displayPassword);
         }}
       />
       <CardDivider />
-      <Button title="Sign in" onPress={handleSubmit(logIn)} />
+      <Button
+        title="Sign in"
+        color={mainAppColor}
+        onPress={handleSubmit(logIn)}
+      />
     </View>
   );
 };

@@ -17,6 +17,7 @@ import {useMedia} from '../hooks/ApiHooks';
 import {MainContext} from '../contexts/MainContext';
 import {Video} from 'expo-av';
 import {userPictureTagPrefix} from '../utils/variables';
+import {mainAppColor} from '../utils/colors';
 
 const UploadProfilePicture = ({navigation}) => {
   const {postMediaWithTag} = useMedia();
@@ -141,12 +142,13 @@ const UploadProfilePicture = ({navigation}) => {
 
           <CardDivider />
 
-          <Button title="Select File" onPress={pickFile} />
+          <Button title="Select File" color={mainAppColor} onPress={pickFile} />
         </Card>
         <Card>
           <Button
             disabled={!mediaFile.uri}
             title="Upload"
+            color={mainAppColor}
             onPress={uploadFile}
           />
           {isLoading && <ActivityIndicator size="large" />}
