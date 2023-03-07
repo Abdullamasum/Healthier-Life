@@ -5,12 +5,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../views/Home';
 import Profile from '../views/Profile';
 import Single from '../views/Single';
-import Login from '../views/Login';
 import {MainContext} from '../contexts/MainContext';
 import Upload from '../views/Upload';
 import {Icon} from '@rneui/themed';
 import MyFiles from '../views/MyFiles';
 import Modify from '../views/Modify';
+import Welcome from '../views/Welcome';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -59,7 +59,9 @@ const StackScreen = () => {
           <Stack.Screen name="Modify" component={Modify} />
         </>
       ) : (
-        <Stack.Screen name="Home" component={Home}></Stack.Screen>
+        <>
+          <Stack.Screen name="Welcome" component={Welcome}></Stack.Screen>
+        </>
       )}
     </Stack.Navigator>
   );

@@ -1,5 +1,3 @@
-import {View, Text} from 'react-native';
-
 import PropTypes from 'prop-types';
 import List from '../components/forms/List';
 
