@@ -14,6 +14,7 @@ import Welcome from '../views/Welcome';
 import UploadProfilePicture from '../views/UploadProfilePicture';
 import {mainAppColor, tabActiveColor, tabInactiveColor} from '../utils/colors';
 import {StyleSheet} from 'react-native';
+import LottieIcons from '../components/forms/LottieIcons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -22,6 +23,9 @@ const TabScreen = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          return <LottieIcons iconName={route.name} focused={focused} />;
+        },
         tabBarStyle: styles.TabNavigator,
         tabBarActiveTintColor: tabActiveColor,
         tabBarInactiveTintColor: tabInactiveColor,
