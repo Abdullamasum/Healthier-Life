@@ -3,7 +3,7 @@ import {StyleSheet, Button, View} from 'react-native';
 import {Video} from 'expo-av';
 import React from 'react';
 
-const myVideo = () => {
+const MyVideo = () => {
   const video = React.useRef(null);
   const secondVideo = React.useRef(null);
   const [status, setStatus] = React.useState({});
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default myVideo;
+export default MyVideo;

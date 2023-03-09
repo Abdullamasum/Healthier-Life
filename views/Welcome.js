@@ -7,8 +7,7 @@ import RegisterForm from '../components/forms/RegisterForm';
 import {useUser} from '../hooks/ApiHooks';
 import {MainContext} from '../contexts/MainContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Video} from 'expo-av';
-import {myVideo} from './Video';
+import MyVideo from './Video';
 
 const Welcome = () => {
   const [toggleForm, setToggleForm] = useState(true);
@@ -62,7 +61,7 @@ const Welcome = () => {
           </Card>
           <Card>
             <ScrollView>
-              <myVideo />
+              <MyVideo />
             </ScrollView>
           </Card>
           <Card>
