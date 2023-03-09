@@ -7,6 +7,9 @@ import RegisterForm from '../components/forms/RegisterForm';
 import {useUser} from '../hooks/ApiHooks';
 import {MainContext} from '../contexts/MainContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Video} from 'expo-av';
+import {myVideo} from './Video';
+
 const Welcome = () => {
   const [toggleForm, setToggleForm] = useState(true);
   const {setIsLoggedIn, setUser} = useContext(MainContext);
@@ -59,7 +62,7 @@ const Welcome = () => {
           </Card>
           <Card>
             <ScrollView>
-              <Text> Here goes the image or video</Text>
+              <myVideo />
             </ScrollView>
           </Card>
           <Card>
