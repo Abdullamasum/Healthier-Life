@@ -15,11 +15,17 @@ import UploadProfilePicture from '../views/UploadProfilePicture';
 import {mainAppColor, tabActiveColor, tabInactiveColor} from '../utils/colors';
 import {StyleSheet} from 'react-native';
 import LottieIcons from '../components/forms/LottieIcons';
+import PropTypes from 'prop-types';
+import Search from '../views/Search';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const TabScreen = () => {
+const TabScreen = ({navigation}) => {
+  const onSearchPressed = () => {
+    navigation.navigate('Search');
+  };
+
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -38,6 +44,11 @@ const TabScreen = () => {
           title: 'Home',
           headerStyle: styles.TabHeader,
           tabBarIcon: ({color}) => <Icon name="home" color={color} />,
+          headerRight: () => (
+            <>
+              <Icon name="search" size={30} onPress={onSearchPressed} />
+            </>
+          ),
         }}
       />
       <Tab.Screen
@@ -105,6 +116,14 @@ const StackScreen = () => {
               headerStyle: styles.TabHeader,
             }}
           />
+          <Stack.Screen
+            name="Search"
+            component={Search}
+            options={{
+              title: 'Search',
+              headerStyle: styles.TabHeader,
+            }}
+          />
         </>
       ) : (
         <>
@@ -120,6 +139,10 @@ const StackScreen = () => {
       )}
     </Stack.Navigator>
   );
+};
+
+TabScreen.propTypes = {
+  navigation: PropTypes.object,
 };
 
 const Navigator = () => {
