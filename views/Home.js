@@ -4,11 +4,13 @@ import List from '../components/forms/List';
 import PropTypes from 'prop-types';
 
 import LottieIcons from '../components/forms/LottieIcons';
+
 const Home = ({navigation}) => {
   return (
     <>
       <SafeAreaView style={styles.container}>
         <List navigation={navigation} />
+
         <LottieView source={require('../Lottie/Home.json')} autoPlay />
       </SafeAreaView>
     </>
