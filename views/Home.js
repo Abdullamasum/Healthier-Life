@@ -3,6 +3,7 @@ import {Platform, StyleSheet, SafeAreaView} from 'react-native';
 import List from '../components/forms/List';
 import PropTypes from 'prop-types';
 
+import LottieIcons from '../components/forms/LottieIcons';
 const Home = ({navigation}) => {
   return (
     <>
