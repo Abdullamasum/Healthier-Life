@@ -9,7 +9,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {MainContext} from '../contexts/MainContext';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import {ButtonGroup, Image} from '@rneui/base';
-import StarRating from 'react-native-star-rating';
 
 const Single = ({navigation, route}) => {
   // console.log(route.params);
@@ -34,10 +33,6 @@ const Single = ({navigation, route}) => {
   const {getFavouritesByFileId, postFavourite, deleteFavourite} =
     useFavourite();
   // here goes ratings
-  const [rating, setRating] = useState();
-  const onStarRatingPress = (rating) => {
-    setRating(rating);
-  };
 
   const getOwner = async () => {
     const token = await AsyncStorage.getItem('userToken');
@@ -194,16 +189,7 @@ const Single = ({navigation, route}) => {
             <Icon name="save" />
             <Text>{(filesize / 1000000).toFixed(2)} MB</Text>
           </ListItem>
-          <ListItem>
-            <Icon name="ratings" />
-            <StarRating
-              disabled={false}
-              maxStars={5}
-              rating={rating.starCount}
-              selectedStar={(rating) => onStarRatingPress(rating)}
-            />
-            ;
-          </ListItem>
+
           <ListItem>
             <Icon name="person" />
             <Text>{owner.username}</Text>
