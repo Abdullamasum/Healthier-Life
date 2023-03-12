@@ -16,6 +16,9 @@
 
 6.  Analytics and insights: The application should provide users with insights and analytics on their content performance, including views, likes, comments, and shares.
 
+### Demo
+https://users.metropolia.fi/~juliusli/video/web_react_demo.mp4
+
 ## Getting Started
 
 ### Prerequisites
