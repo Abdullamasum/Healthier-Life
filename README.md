@@ -25,17 +25,12 @@
 
 ## Installation
 
-1.  Clone the repository:
-
-```
+Clone the repository:
 git clone https://github.com/Abdullamasum/ReactNative-Project
-```
 
-2. Install the dependencies:
+## Install the dependencies:
 
-```
-npm install
-```
+- npm install
 
 **The application can be run on a simulator or a physical device using the Expo app.**
 
