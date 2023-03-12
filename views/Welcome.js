@@ -7,6 +7,8 @@ import RegisterForm from '../components/forms/RegisterForm';
 import {useUser} from '../hooks/ApiHooks';
 import {MainContext} from '../contexts/MainContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import myVideo from './video';
+
 const Welcome = () => {
   const [toggleForm, setToggleForm] = useState(true);
   const {setIsLoggedIn, setUser} = useContext(MainContext);
@@ -92,6 +94,7 @@ const Welcome = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'purple',
   },
   text: {
     fontSize: 11,
