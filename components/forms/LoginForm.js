@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useContext} from 'react';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {MainContext} from '../../contexts/MainContext';
 import {useAuthentication} from '../../hooks/ApiHooks';
@@ -31,6 +31,11 @@ const LoginForm = (props) => {
     } catch (error) {
       console.error('LogIn, logIn: ', error);
       // TODO: notify user about failed login
+      Alert.alert(
+        'Login failed',
+        'Something went wrong. Please make sure your login info is correct',
+        [{text: 'Ok'}]
+      );
     }
   };
 
